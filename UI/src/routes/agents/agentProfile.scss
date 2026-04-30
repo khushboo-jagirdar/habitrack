@@ -1,0 +1,165 @@
+@use "../../styles/responsive.scss" as *;
+
+.agentProfilePage {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f9f9 0%, #ffffff 100%);
+  padding: 60px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.profileCard {
+  width: 100%;
+  max-width: 720px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  padding: 28px;
+
+  .header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+
+    .headerInfo {
+      h1 {
+        font-size: 28px;
+        margin-bottom: 6px;
+        color: #1a3a3a;
+      }
+
+      p {
+        margin-bottom: 8px;
+        color: #4a6a6a;
+        font-weight: 600;
+      }
+
+      .rating {
+        display: inline-block;
+        background: #f0f9f9;
+        color: #008080;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+    }
+
+    @include sm {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .details {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+
+    .detailItem {
+      background: #f8fbfb;
+      padding: 14px 16px;
+      border-radius: 12px;
+
+      .label {
+        display: block;
+        font-size: 12px;
+        color: #7a9a9a;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .value {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1a3a3a;
+      }
+    }
+
+    @include sm {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .specialties {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .tag {
+      background: #e7f4f4;
+      color: #006666;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+
+  .actions {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+
+    .btnPrimary,
+    .btnSecondary {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btnPrimary {
+      background: #008080;
+      color: #ffffff;
+
+      &:hover {
+        background: #006666;
+      }
+    }
+
+    .btnSecondary {
+      background: #f0f9f9;
+      color: #008080;
+      border: 1px solid #d0e8e8;
+
+      &:hover {
+        background: #e0f0f0;
+      }
+    }
+
+    @include sm {
+      flex-direction: column;
+    }
+  }
+
+  .footerLinks {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .backLink {
+    display: inline-block;
+    margin-top: 8px;
+    text-decoration: none;
+    color: #008080;
+    font-weight: 600;
+  }
+}

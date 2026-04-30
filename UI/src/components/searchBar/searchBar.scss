@@ -1,0 +1,147 @@
+@use "../../styles/responsive.scss" as *;
+
+.searchBar {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 128, 128, 0.1);
+  margin-top: 20px;
+  overflow: visible;
+  border: 1px solid #e0eaea;
+
+  /* Type Buttons */
+  .type {
+    display: flex;
+    justify-content: center;
+    background: #f8fdfd; // Teal tint
+    border-bottom: 1px solid #e0eaea;
+    border-radius: 16px 16px 0 0;
+    flex-wrap: wrap;
+    padding: 8px;
+
+    button {
+      padding: 14px 28px;
+      background: transparent;
+      border: none;
+      font-weight: 600;
+      color: #4a6a6a; // Teal secondary
+      text-transform: capitalize;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+      margin: 4px;
+
+      &.active {
+        background: #008080; // Teal
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 128, 128, 0.3);
+      }
+
+      &:hover:not(.active) {
+        color: #008080; // Teal
+        background: rgba(0, 128, 128, 0.1);
+        transform: translateY(-1px);
+      }
+
+      @include sm {
+        flex: 1;
+        min-width: 120px;
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+
+      @include xs {
+        min-width: 100px;
+        padding: 10px 12px;
+      }
+    }
+  }
+
+  /* Form */
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 0 0 16px 16px;
+    align-items: center;
+    justify-content: space-between;
+
+    @include md {
+      padding: 20px;
+      gap: 12px;
+    }
+
+    @include sm {
+      flex-direction: column;
+      padding: 20px;
+      gap: 15px;
+    }
+
+    @include xs {
+      padding: 16px;
+      gap: 12px;
+    }
+
+    input {
+      flex: 1;
+      min-width: 200px;
+      border: 1px solid #e0eaea;
+      background: #f8fdfd; // Teal tint
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      color: #1a3a3a;
+
+      &::placeholder {
+        color: #7a9a9a; // Teal muted
+      }
+
+      &:focus {
+        border-color: #008080; // Teal
+        box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
+        background: #ffffff;
+      }
+
+      @include sm {
+        width: 100%;
+        min-width: auto;
+      }
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #FFBF00; // Amber
+      color: #1a3a3a;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+
+      &:hover {
+        background: #008080; // Teal
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      @include sm {
+        width: 100%;
+        justify-content: center;
+        padding: 16px 24px;
+      }
+    }
+  }
+}

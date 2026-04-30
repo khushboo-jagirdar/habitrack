@@ -1,0 +1,474 @@
+@use "../../styles/responsive.scss" as *;
+
+@keyframes suSlideLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes suSlideRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes suFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes suStepPop {
+  0%   { transform: scale(0.6); opacity: 0; }
+  70%  { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.signUp {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: #f4fafa;
+  padding: 32px 20px;
+  overflow-y: auto;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(0,128,128,0.06) 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .signUpContainer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    max-width: 980px;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 24px 80px rgba(0,128,128,0.12), 0 4px 16px rgba(0,0,0,0.06);
+    overflow: hidden;
+    animation: suFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
+
+    @include sm { flex-direction: column; border-radius: 16px; }
+  }
+
+  // ── Left form panel ─────────────────────────────────────────────────────────
+  .left {
+    flex: 1;
+    padding: 40px 44px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    animation: suSlideLeft 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+
+    @include md { padding: 36px 32px; }
+    @include sm { padding: 28px 24px; }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      text-decoration: none;
+
+      img { width: 34px; height: 34px; }
+      span { font-size: 20px; font-weight: 800; color: #008080; letter-spacing: -0.3px; }
+    }
+
+    // ── Step progress ──────────────────────────────────────────────────────────
+    .signupSteps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 24px;
+      background: #f4fafa;
+      border-radius: 12px;
+      padding: 12px 16px;
+
+      .signupStep {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #9ab8b8;
+        white-space: nowrap;
+        transition: color 0.3s;
+
+        span {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background: #ddeaea;
+          color: #9ab8b8;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          font-weight: 800;
+          flex-shrink: 0;
+          transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        &.active {
+          color: #008080;
+          span {
+            background: #008080;
+            color: #fff;
+            box-shadow: 0 0 0 4px rgba(0,128,128,0.15);
+            animation: suStepPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+          }
+        }
+
+        &.done {
+          color: #16a34a;
+          span { background: #16a34a; color: #fff; }
+        }
+      }
+
+      .stepLine {
+        flex: 1;
+        height: 2px;
+        background: #ddeaea;
+        margin: 0 8px;
+        border-radius: 2px;
+        transition: background 0.3s;
+        min-width: 20px;
+      }
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #0a1f1f;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+      animation: suFadeUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.2s both;
+    }
+
+    p {
+      font-size: 14px;
+      color: #6a8a8a;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      animation: suFadeUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+    }
+
+    .errorMessage {
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      border: 1px solid #fecaca;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: suFadeUp 0.3s ease both;
+
+      &::before { content: "⚠️"; font-size: 14px; }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      width: 100%;
+      animation: suFadeUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.35s both;
+
+      .formGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        label {
+          font-size: 12px;
+          font-weight: 700;
+          color: #1a3a3a;
+          letter-spacing: 0.3px;
+          text-transform: uppercase;
+        }
+
+        .inputWrap {
+          position: relative;
+
+          .inputIcon {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 15px;
+            pointer-events: none;
+          }
+
+          input, select {
+            width: 100%;
+            padding: 12px 14px 12px 40px;
+            border: 1.5px solid #ddeaea;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #f8fdfd;
+            color: #0a1f1f;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            box-sizing: border-box;
+
+            &:focus {
+              border-color: #008080;
+              background: #fff;
+              box-shadow: 0 0 0 3px rgba(0,128,128,0.1);
+              outline: none;
+            }
+
+            &::placeholder { color: #9ab8b8; }
+          }
+
+          select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23008080' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            background-color: #f8fdfd;
+          }
+        }
+
+        // plain input (no icon wrap)
+        input:not(.inputWrap input), select:not(.inputWrap select) {
+          width: 100%;
+          padding: 12px 14px;
+          border: 1.5px solid #ddeaea;
+          border-radius: 10px;
+          font-size: 14px;
+          background: #f8fdfd;
+          color: #0a1f1f;
+          transition: border-color 0.2s, box-shadow 0.2s;
+          box-sizing: border-box;
+
+          &:focus {
+            border-color: #008080;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(0,128,128,0.1);
+            outline: none;
+          }
+
+          &::placeholder { color: #9ab8b8; }
+        }
+
+        small {
+          font-size: 11px;
+          color: #9ab8b8;
+          margin-top: 2px;
+        }
+      }
+
+      .terms {
+        .agree {
+          display: flex;
+          align-items: flex-start;
+          gap: 9px;
+          font-size: 13px;
+          color: #4a6a6a;
+          line-height: 1.45;
+          cursor: pointer;
+
+          input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            accent-color: #008080;
+          }
+        }
+      }
+
+      .signUpButton {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #008080, #006060);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.22s;
+        letter-spacing: 0.2px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 4px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: rgba(255,255,255,0.12);
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+        }
+
+        &:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0,128,128,0.3);
+          &::after { transform: translateX(0); }
+        }
+
+        &:disabled {
+          background: #94a3b8;
+          cursor: not-allowed;
+          transform: none;
+        }
+      }
+    }
+
+    .signinLink {
+      text-align: center;
+      font-size: 13px;
+      color: #6a8a8a;
+      margin-top: 14px;
+      animation: suFadeUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.5s both;
+
+      a {
+        color: #008080;
+        font-weight: 700;
+        text-decoration: none;
+        &:hover { color: #005f5f; text-decoration: underline; }
+      }
+    }
+
+    .devNote {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #92400e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &::before { content: "🔑"; }
+    }
+
+    .skipBtn {
+      background: transparent;
+      border: 1.5px solid #ddeaea;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6a8a8a;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 8px;
+      transition: all 0.2s;
+
+      &:hover {
+        border-color: #008080;
+        color: #008080;
+        background: rgba(0,128,128,0.04);
+      }
+    }
+  }
+
+  // ── Right visual panel ───────────────────────────────────────────────────────
+  .right {
+    flex: 1;
+    position: relative;
+    min-height: 480px;
+    animation: suSlideRight 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+
+    @include sm { display: none; }
+
+    .imageContainer {
+      position: absolute;
+      inset: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, rgba(0,80,80,0.88) 0%, rgba(0,50,50,0.95) 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 48px 40px;
+        color: #fff;
+
+        .su-brand {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 28px;
+
+          span:first-child {
+            font-size: 26px;
+            font-weight: 900;
+            color: #FFBF00;
+          }
+
+          span:last-child {
+            font-size: 11px;
+            color: rgba(255,255,255,0.55);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+          }
+        }
+
+        h2 {
+          font-size: 30px;
+          font-weight: 800;
+          color: #fff;
+          margin-bottom: 12px;
+          line-height: 1.2;
+          letter-spacing: -0.5px;
+        }
+
+        p {
+          font-size: 14px;
+          color: rgba(255,255,255,0.7);
+          line-height: 1.65;
+          margin-bottom: 28px;
+          max-width: 300px;
+        }
+
+        .su-features {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .su-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.85);
+
+            .su-check {
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              background: rgba(255,191,0,0.2);
+              border: 1px solid rgba(255,191,0,0.4);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 10px;
+              color: #FFBF00;
+              flex-shrink: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

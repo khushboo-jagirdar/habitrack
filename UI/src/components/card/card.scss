@@ -1,0 +1,212 @@
+@use "../../styles/responsive.scss" as *;
+
+.card {
+  display: flex;
+  gap: 20px;
+  padding: 18px; // Slightly increased padding
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 128, 128, 0.08); // Teal tint shadow
+  border: 1px solid #e0eaea; // Subtle teal border
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 128, 128, 0.15); // Enhanced teal shadow
+    border-color: #008080; // Teal border on hover
+  }
+
+  .imageContainer {
+    flex: 2;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+
+    @include sm { display: none; }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.4s ease;
+
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
+  }
+
+  .textContainer {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px; // Slightly increased gap
+    color: #1a3a3a; // Teal-based text
+
+    img {
+      width: 18px;
+      height: 18px;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #008080; // Teal primary
+      transition: all 0.3s ease;
+      line-height: 1.3;
+
+      &:hover {
+        color: #FF7F50; // Coral accent
+        transform: scale(1.02);
+      }
+    }
+
+    .address {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #7a9a9a; // Teal muted
+    }
+
+    .verification {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 6px;
+
+      .badge {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 999px;
+        letter-spacing: 0.05em;
+      }
+
+      .verified {
+        background: rgba(38, 166, 91, 0.2);
+        color: #2e7d32;
+        border: 1px solid rgba(38, 166, 91, 0.5);
+      }
+
+      .unverified {
+        background: rgba(255, 152, 0, 0.2);
+        color: #f57c00;
+        border: 1px solid rgba(255, 152, 0, 0.5);
+      }
+
+      .legal {
+        background: rgba(30, 136, 229, 0.2);
+        color: #1565c0;
+        border: 1px solid rgba(30, 136, 229, 0.5);
+      }
+
+      .illegal {
+        background: rgba(229, 57, 53, 0.2);
+        color: #c62828;
+        border: 1px solid rgba(229, 57, 53, 0.5);
+      }
+
+      .typeBadge {
+        font-weight: 700;
+        &.rent { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+        &.buy  { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+      }
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background-color: rgba(255, 191, 0, 0.2);
+      width: max-content;
+      color: #1a3a3a;
+      border: 1px solid rgba(255, 191, 0, 0.3);
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+
+      .perMonth {
+        font-size: 13px;
+        font-weight: 500;
+        color: #64748b;
+      }
+    }
+
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+
+      .features {
+        display: flex;
+        gap: 12px;
+        font-size: 14px;
+        flex-wrap: wrap;
+
+        .feature {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background-color: #f8fdfd; // Teal tint
+          padding: 6px 12px;
+          border-radius: 6px;
+          border: 1px solid #e0eaea;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: rgba(0, 128, 128, 0.1);
+            border-color: #008080;
+          }
+        }
+      }
+
+      .icons {
+        display: flex;
+        gap: 12px;
+
+        .iconButton {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          border: 1px solid #e0eaea;
+          background: #fff;
+          color: #1a3a3a;
+          padding: 6px 10px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: all 0.2s ease;
+          font-size: 14px;
+
+          &:hover:not(:disabled) {
+            background-color: rgba(0, 128, 128, 0.08);
+            border-color: #008080;
+          }
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+
+          &.saved {
+            border-color: #2b8a3e;
+            background-color: rgba(43, 138, 62, 0.16);
+            color: #1f5d30;
+          }
+
+          img {
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+    }
+  }
+}

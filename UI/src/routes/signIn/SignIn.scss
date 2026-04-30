@@ -1,0 +1,410 @@
+@use "../../styles/responsive.scss" as *;
+
+@keyframes siSlideLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes siSlideRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes siFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ── Outer wrapper ─────────────────────────────────────────────────────────────
+.signIn {
+  // height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4fafa;
+  padding: 16px 20px;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(0,128,128,0.06) 1.5px, transparent 1.5px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  // ── Card ──────────────────────────────────────────────────────────────────
+  .signInContainer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    height: min(540px, calc(100vh - 70px - 32px));
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,128,128,0.12), 0 4px 16px rgba(0,0,0,0.06);
+    overflow: hidden;
+    animation: siFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
+
+    @include sm { flex-direction: column; border-radius: 16px; height: auto; max-height: calc(100vh - 40px); overflow-y: auto; }
+  }
+
+  // ── Left form panel ────────────────────────────────────────────────────────
+  .left {
+    flex: 1;
+    padding: 20px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    animation: siSlideLeft 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+
+    @include md { padding: 18px 24px; }
+    @include sm { padding: 20px 18px; }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+
+      img  { width: 28px; height: 28px; }
+      span { font-size: 17px; font-weight: 800; color: #008080; letter-spacing: -0.3px; }
+    }
+
+    .modeToggle {
+      display: flex;
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 3px;
+      gap: 3px;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+
+      button {
+        flex: 1;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        background: transparent;
+        color: #64748b;
+        transition: all 0.2s;
+
+        &.active {
+          background: #fff;
+          color: #1e293b;
+          box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+        }
+
+        &:hover:not(.active) { color: #1e293b; }
+      }
+    }
+
+    .si-heading {
+      flex-shrink: 0;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0a1f1f;
+      margin-bottom: 2px;
+      letter-spacing: -0.3px;
+    }
+
+    p {
+      font-size: 12px;
+      color: #6a8a8a;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .errorMessage {
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 7px 10px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      border: 1px solid #fecaca;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+
+      &::before { content: "⚠️"; font-size: 12px; }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      margin-top: 10px;
+      flex-shrink: 0;
+
+      .formGroup {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
+        label {
+          font-size: 10px;
+          font-weight: 700;
+          color: #1a3a3a;
+          letter-spacing: 0.3px;
+          text-transform: uppercase;
+        }
+
+        .inputWrap {
+          position: relative;
+
+          .inputIcon {
+            position: absolute;
+            left: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 13px;
+            pointer-events: none;
+          }
+
+          input {
+            width: 100%;
+            padding: 9px 12px 9px 34px;
+            border: 1.5px solid #ddeaea;
+            border-radius: 8px;
+            font-size: 13px;
+            background: #f8fdfd;
+            color: #0a1f1f;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            box-sizing: border-box;
+
+            &:focus {
+              border-color: #008080;
+              background: #fff;
+              box-shadow: 0 0 0 3px rgba(0,128,128,0.1);
+              outline: none;
+            }
+
+            &::placeholder { color: #9ab8b8; }
+          }
+        }
+      }
+
+      .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include sm { flex-direction: column; gap: 6px; align-items: flex-start; }
+
+        .remember {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 12px;
+          color: #4a6a6a;
+          cursor: pointer;
+
+          input[type="checkbox"] {
+            width: 13px;
+            height: 13px;
+            accent-color: #008080;
+          }
+        }
+
+        .forgotPassword {
+          font-size: 12px;
+          font-weight: 600;
+          color: #008080;
+          text-decoration: none;
+          transition: color 0.2s;
+          &:hover { color: #005f5f; text-decoration: underline; }
+        }
+      }
+
+      .signInButton {
+        width: 100%;
+        padding: 11px;
+        background: linear-gradient(135deg, #008080, #006060);
+        color: #fff;
+        border: none;
+        border-radius: 9px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.22s;
+        letter-spacing: 0.2px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 2px;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: rgba(255,255,255,0.12);
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+        }
+
+        &:hover:not(:disabled) {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 20px rgba(0,128,128,0.3);
+          &::after { transform: translateX(0); }
+        }
+
+        &:disabled { background: #94a3b8; cursor: not-allowed; transform: none; }
+
+        &.adminBtn {
+          background: linear-gradient(135deg, #1e3a8a, #1e40af);
+          &:hover:not(:disabled) { box-shadow: 0 6px 20px rgba(30,58,138,0.35); }
+        }
+      }
+    }
+
+    .signupLink {
+      text-align: center;
+      font-size: 12px;
+      color: #6a8a8a;
+      margin-top: 10px;
+      flex-shrink: 0;
+
+      a {
+        color: #008080;
+        font-weight: 700;
+        text-decoration: none;
+        &:hover { color: #005f5f; text-decoration: underline; }
+      }
+    }
+  }
+
+  // ── Right visual panel ─────────────────────────────────────────────────────
+  .right {
+    flex: 1;
+    position: relative;
+    animation: siSlideRight 0.7s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+
+    @include sm { display: none; }
+
+    .imageContainer {
+      position: absolute;
+      inset: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, rgba(0,80,80,0.88) 0%, rgba(0,50,50,0.95) 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 36px 32px;
+        color: #fff;
+
+        .si-brand {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 20px;
+
+          span:first-child {
+            font-size: 22px;
+            font-weight: 900;
+            color: #FFBF00;
+            letter-spacing: -0.5px;
+          }
+
+          span:last-child {
+            font-size: 10px;
+            color: rgba(255,255,255,0.55);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+          }
+        }
+
+        h2 {
+          font-size: 24px;
+          font-weight: 800;
+          color: #fff;
+          margin-bottom: 8px;
+          line-height: 1.2;
+          letter-spacing: -0.3px;
+        }
+
+        p {
+          font-size: 13px;
+          color: rgba(255,255,255,0.7);
+          line-height: 1.55;
+          margin-bottom: 20px;
+          max-width: 280px;
+        }
+
+        .si-stats {
+          display: flex;
+          gap: 20px;
+
+          .si-stat {
+            strong {
+              display: block;
+              font-size: 20px;
+              font-weight: 800;
+              color: #FFBF00;
+            }
+            span {
+              font-size: 10px;
+              color: rgba(255,255,255,0.55);
+            }
+          }
+        }
+
+        &.adminOverlay {
+          background: linear-gradient(160deg, rgba(15,23,42,0.92) 0%, rgba(30,58,138,0.95) 100%);
+        }
+
+        .si-features {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          .si-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12.5px;
+            color: rgba(255,255,255,0.85);
+
+            .si-check {
+              width: 18px;
+              height: 18px;
+              border-radius: 50%;
+              background: rgba(255,255,255,0.15);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 10px;
+              font-weight: 700;
+              flex-shrink: 0;
+              color: #FFBF00;
+            }
+          }
+        }
+      }
+    }
+  }
+}
